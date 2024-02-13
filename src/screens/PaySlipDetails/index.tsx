@@ -1,11 +1,14 @@
 import { Button, Card, CardActions, CardContent, Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Document, Page } from 'react-pdf';
 
 import { mockPayslips } from '../../assets/data/payslips';
 import { formatDate } from '../../common/utils';
 import CustomAppBar from '../../components/CustomAppBar';
 import { Payslip } from '../../types/common';
+
+import './style.css';
 
 export default function PaySlipDetails() {
     const params = useParams();
@@ -31,7 +34,15 @@ export default function PaySlipDetails() {
 
     const renderPdf = () => {
         const pdfFile = `/${payslip?.file}`;
-        return <iframe src={pdfFile} width="100%" height="600px" title="Payslip" />;
+        return (
+            <Card variant={'outlined'}>
+                <CardContent>
+                    <Document file={pdfFile} renderMode={'canvas'} className={'pdfViewer'}>
+                        <Page pageNumber={1} renderAnnotationLayer={false} renderTextLayer={false} />
+                    </Document>
+                </CardContent>
+            </Card>
+        );
     };
 
     const onDownload = () => {};
@@ -43,7 +54,7 @@ export default function PaySlipDetails() {
                 <br />
                 <Card variant={'outlined'}>
                     <CardContent>
-                        <Typography variant="h5" component="div">
+                        <Typography variant={'h6'} component={'div'}>
                             {`Pay Period: ${fromDate} to ${toDate}`}
                         </Typography>
                     </CardContent>
@@ -53,6 +64,7 @@ export default function PaySlipDetails() {
                         </Button>
                     </CardActions>
                 </Card>
+                <br />
                 {renderPdf()}
             </Container>
         </>
