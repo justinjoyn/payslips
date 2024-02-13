@@ -1,7 +1,7 @@
 import { Button, Card, CardActions, CardContent, Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import CustomAppBar from '../../components/CustomAppBar';
+import CustomAppBar from '../components/CustomAppBar';
 
 export default function ErrorPage() {
     const navigate = useNavigate();

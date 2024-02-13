@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">payslips</string>
+    <string name="app_name">Payslips</string>
     <string name="title_activity_main">payslips</string>
     <string name="package_name">com.justinjoyn.payslip</string>
     <string name="custom_url_scheme">com.justinjoyn.payslip</string>

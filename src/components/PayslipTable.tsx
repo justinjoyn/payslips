@@ -13,7 +13,7 @@ export default function PayslipTable(props: Props) {
     const { payslips, onClick } = props;
 
     const PayslipRows = useMemo(
-        () => payslips.map(row => <PayslipRow payslip={row} onClick={onClick} />),
+        () => payslips.map(row => <PayslipRow payslip={row} onClick={onClick} key={row.id} />),
         [onClick, payslips]
     );
 

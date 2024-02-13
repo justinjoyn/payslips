@@ -1,9 +1,9 @@
-import moment from 'moment';
+import { format } from 'date-fns';
 
 /**
  * @description: Function to format the date to DD MMM, YYYY
  * @param {string} date
  */
 export const formatDate = (date: string) => {
-    return moment(date).format('DD MMM, YYYY');
+    return format(date, 'dd MMM, yyyy');
 };
