@@ -1,11 +1,17 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 
-export default function CustomAppBar() {
+type Props = {
+    title?: string;
+};
+
+export default function CustomAppBar(props: Props) {
+    const { title } = props;
+
     return (
         <AppBar position={'sticky'}>
             <Toolbar>
                 <Typography variant={'h6'} component={'div'} sx={{ flexGrow: 1 }}>
-                    Payslips
+                    {title}
                 </Typography>
             </Toolbar>
         </AppBar>

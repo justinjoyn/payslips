@@ -26,7 +26,7 @@ export default function PaySlips() {
 
     return (
         <>
-            <CustomAppBar />
+            <CustomAppBar title={'Payslips'} />
             <Container>
                 <PayslipTable payslips={payslips} onClick={onPayslipClick} />
             </Container>
