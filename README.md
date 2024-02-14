@@ -1,46 +1,98 @@
-# Getting Started with Create React App
+**Capacitor-React App**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to our Capacitor React app! This README will guide you through setting up the project, running the app locally, and deploying it to various devices.
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+1. Clone this repository to your local machine:
 
-### `npm start`
+```
+git clone https://github.com/justinjoyn/payslips.git
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. Navigate into the project directory:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+cd payslips
+```
 
-### `npm test`
+3. Install dependencies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm install
+```
 
-### `npm run build`
+## Local Development
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To run the app locally on your development machine:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This command will start the development server and open the app in your default web browser.
 
-### `npm run eject`
+## Running on Devices
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### iOS
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run the app on iOS devices or simulator:
+```
+npx cap run ios
+```
+OR
+```
+npx cap open ios
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This command will open the project in Xcode. From Xcode, you can choose a simulator or connect your iOS device and run the app.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Android
 
-## Learn More
+To run the app on Android devices or emulator:
+```
+npx cap run android
+```
+OR
+```
+npx cap open android
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This command will open the project in Android Studio. From Android Studio, you can choose an emulator or connect your Android device and run the app.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Build
+
+To build the app for production:
+
+```
+npm run build
+```
+
+This command will create a production build of your app in the `build` directory.
+
+## Capacitor Commands
+
+### Syncing Changes
+
+After making any changes to your web code, you need to sync those changes with the native projects:
+
+```
+npx cap sync
+```
+
+This command copies the web assets to each native project.
+
+### Updating Capacitor
+
+To update Capacitor to the latest version:
+
+```
+npm install @capacitor/core@latest
+npx cap update
+```
+
+This command updates Capacitor to the latest version and syncs native changes.
+
+For more information on Capacitor commands and configurations, refer to the official [Capacitor documentation](https://capacitorjs.com/docs). 
+
+Happy coding! 🚀
