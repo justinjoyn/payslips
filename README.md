@@ -2,6 +2,8 @@
 
 Welcome to our Capacitor React app! This README will guide you through setting up the project, running the app locally, and deploying it to various devices.
 
+The web app is hosted at: https://justinjoyn.github.io/payslips/
+
 ## Setup
 
 1. Clone this repository to your local machine:
@@ -37,10 +39,13 @@ This command will start the development server and open the app in your default 
 ### iOS
 
 To run the app on iOS devices or simulator:
+
 ```
 npx cap run ios
 ```
+
 OR
+
 ```
 npx cap open ios
 ```
@@ -50,10 +55,13 @@ This command will open the project in Xcode. From Xcode, you can choose a simula
 ### Android
 
 To run the app on Android devices or emulator:
+
 ```
 npx cap run android
 ```
+
 OR
+
 ```
 npx cap open android
 ```
@@ -93,6 +101,6 @@ npx cap update
 
 This command updates Capacitor to the latest version and syncs native changes.
 
-For more information on Capacitor commands and configurations, refer to the official [Capacitor documentation](https://capacitorjs.com/docs). 
+For more information on Capacitor commands and configurations, refer to the official [Capacitor documentation](https://capacitorjs.com/docs).
 
 Happy coding! 🚀
