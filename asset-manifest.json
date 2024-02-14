@@ -1,10 +1,9 @@
 {
   "files": {
     "main.css": "/payslips/static/css/main.3427a18c.css",
-    "main.js": "/payslips/static/js/main.317166d9.js",
+    "main.js": "/payslips/static/js/main.2f5f20b1.js",
     "static/js/276.1ec16446.chunk.js": "/payslips/static/js/276.1ec16446.chunk.js",
     "static/js/592.19356610.chunk.js": "/payslips/static/js/592.19356610.chunk.js",
-    "static/media/pdf.worker.min.js": "/payslips/static/media/pdf.worker.min.dc9a8d66675f39871c8c.js",
     "static/media/roboto-latin-500-normal.woff2": "/payslips/static/media/roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2",
     "static/media/roboto-latin-700-normal.woff2": "/payslips/static/media/roboto-latin-700-normal.227c93190fe7f82de3f8.woff2",
     "static/media/roboto-latin-400-normal.woff2": "/payslips/static/media/roboto-latin-400-normal.b009a76ad6afe4ebd301.woff2",
@@ -63,12 +62,12 @@
     "static/media/roboto-greek-ext-700-normal.woff": "/payslips/static/media/roboto-greek-ext-700-normal.249853776d22a271b2b5.woff",
     "index.html": "/payslips/index.html",
     "main.3427a18c.css.map": "/payslips/static/css/main.3427a18c.css.map",
-    "main.317166d9.js.map": "/payslips/static/js/main.317166d9.js.map",
+    "main.2f5f20b1.js.map": "/payslips/static/js/main.2f5f20b1.js.map",
     "276.1ec16446.chunk.js.map": "/payslips/static/js/276.1ec16446.chunk.js.map",
     "592.19356610.chunk.js.map": "/payslips/static/js/592.19356610.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3427a18c.css",
-    "static/js/main.317166d9.js"
+    "static/js/main.2f5f20b1.js"
   ]
 }
