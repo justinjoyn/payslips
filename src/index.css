@@ -3,7 +3,31 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Safe area support */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  margin-bottom: env(safe-area-inset-bottom);
 }
+
+/* Safe area support */
+#statusbar {
+  height: env(safe-area-inset-top);
+  background-color: #1769aa;
+}
+
+#container {
+  max-height: 100vh !important;
+  min-height: 100vh !important;
+}
+
+#root {
+  max-height: 100vh - env(safe-area-inset-top) !important;
+  height: 100vh - env(safe-area-inset-top) !important;
+  overflow: scroll !important;
+}
+
+
 
 .react-pdf__Page__canvas {
   width: 100% !important;
