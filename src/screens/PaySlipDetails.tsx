@@ -1,25 +1,30 @@
 import { Alert, Button, Card, CardActions, CardContent, Container, Typography } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Document, Page } from 'react-pdf';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
-import { FileOpener } from '@capacitor-community/file-opener';
 
 import { mockPayslips } from '../assets/data/payslips';
 import { formatDate } from '../common/utils';
 import CustomAppBar from '../components/CustomAppBar';
 import { Payslip } from '../types/common';
-import { constants } from 'buffer';
+
+const DOWNLOAD_STATUS = {
+    SUCCESS: 'SUCCESS',
+    ERROR: 'ERROR'
+} as const;
 
 export default function PaySlipDetails() {
     const params = useParams();
 
+    const isWeb = Capacitor.getPlatform() === 'web';
+
     const [payslip, setPayslip] = useState<Payslip>();
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
-    const [hasDownloaded, setHasDownloaded] = useState(false);
+    const [downloadStatus, setDownloadStatus] = useState<keyof typeof DOWNLOAD_STATUS>();
 
     useEffect(() => {
         // Fetch payslip by id
@@ -32,93 +37,52 @@ export default function PaySlipDetails() {
             setToDate(formattedToDate);
             setPayslip(payslip);
         }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onDownload = async () => {
-        const pdfFile = `${process.env.PUBLIC_URL}/${payslip?.file}`;
-        console.log('pdfFile', pdfFile);
+        if (!payslip?.file) return;
 
-        if (Capacitor.getPlatform() === 'web') {
+        if (isWeb) {
             const link = document.createElement('a');
-            link.href = pdfFile;
+            link.href = payslip?.file;
+            link.target = '_blank';
             link.download = 'payslip.pdf';
             link.click();
-            setHasDownloaded(true);
+            setDownloadStatus(DOWNLOAD_STATUS.SUCCESS);
         } else if (Capacitor.isNativePlatform()) {
             await Filesystem.requestPermissions();
             Filesystem.downloadFile({
-                url: pdfFile,
+                url: payslip?.file,
                 directory: Directory.Documents,
                 path: 'payslip.pdf'
             })
                 .then(async () => {
-                    setHasDownloaded(true);
+                    setDownloadStatus(DOWNLOAD_STATUS.SUCCESS);
                 })
                 .catch(error => {
-                    console.error('Error downloading file', error);
+                    setDownloadStatus(DOWNLOAD_STATUS.ERROR);
                 });
         } else {
-            // Handle unsupported platform
+            setDownloadStatus(DOWNLOAD_STATUS.ERROR);
         }
     };
 
-    // Function to read a file from the public directory
-    async function readFileFromPublicDirectory(filename: string | undefined) {
-        try {
-            const file = await Filesystem.readFile({
-                path: `public/${filename}`
-            });
-            // File data will be in file.data
-            console.log('File data:', file.data);
-            return file.data;
-        } catch (error) {
-            console.error('Error reading file:', error);
-            return null;
-        }
-    }
-
-    const onOpen = async () => {
-        const pdfFile = `${process.env.PUBLIC_URL}/${payslip?.file}`;
-        await readFileFromPublicDirectory(payslip?.file);
-        console.log('pdfFile', pdfFile);
-        await FileOpener.open({ filePath: pdfFile, contentType: 'application/pdf' }).catch(error => {
-            console.error('Error opening file', error);
-        });
-    };
-
-    const renderPdf = () => {
-        if (Capacitor.getPlatform() === 'web') {
-            const pdfFile = `/${payslip?.file}`;
+    const renderAlert = () => {
+        if (downloadStatus === DOWNLOAD_STATUS.SUCCESS) {
             return (
-                <Card variant={'outlined'}>
-                    <CardContent>
-                        <Document file={pdfFile} renderMode={'canvas'}>
-                            <Page pageNumber={1} renderAnnotationLayer={false} renderTextLayer={false} />
-                        </Document>
-                    </CardContent>
-                </Card>
+                <Alert icon={<CheckIcon fontSize={'inherit'} />} severity={'success'}>
+                    {`The payslip has been successfully downloaded.`}
+                </Alert>
+            );
+        } else if (downloadStatus === DOWNLOAD_STATUS.ERROR) {
+            return (
+                <Alert icon={<CloseIcon fontSize={'inherit'} />} severity={'error'}>
+                    {`There was an error while downloading the payslip. Please try again later.`}
+                </Alert>
             );
         } else {
             return null;
         }
-    };
-
-    const renderActions = () => {
-        const isWeb = Capacitor.getPlatform() === 'web';
-        return (
-            <CardActions>
-                <Button size="small" onClick={onDownload}>
-                    Download Payslip
-                </Button>
-                {!isWeb && (
-                    <Button size="small" onClick={onOpen}>
-                        View Payslip
-                    </Button>
-                )}
-            </CardActions>
-        );
     };
 
     return (
@@ -141,15 +105,13 @@ export default function PaySlipDetails() {
                             {`Pay Period: ${fromDate} to ${toDate}`}
                         </Typography>
                     </CardContent>
-                    {renderActions()}
-                    {hasDownloaded && (
-                        <Alert icon={<CheckIcon fontSize={'inherit'} />} severity={'success'}>
-                            The payslip has been successfully downloaded.
-                        </Alert>
-                    )}
+                    <CardActions>
+                        <Button size="small" onClick={onDownload}>
+                            {`Download Payslip`}
+                        </Button>
+                    </CardActions>
+                    {renderAlert()}
                 </Card>
-                <br />
-                {renderPdf()}
             </Container>
         </>
     );

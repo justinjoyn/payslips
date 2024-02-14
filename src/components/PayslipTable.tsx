@@ -27,7 +27,6 @@ export default function PayslipTable(props: Props) {
                         <TableCell align={'right'} sx={{ display: { xs: 'none', sm: 'block' } }}>
                             Net Pay
                         </TableCell>
-                        <TableCell align={'right'}></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>{PayslipRows}</TableBody>

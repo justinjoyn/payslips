@@ -1,6 +1,5 @@
-import { IconButton, TableCell, TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import ArticleIcon from '@mui/icons-material/Article';
-import DownloadIcon from '@mui/icons-material/Download';
 
 import { Payslip } from '../types/common';
 import { formatDate } from '../common/utils';
@@ -27,11 +26,6 @@ export default function PayslipRow(props: Props) {
             </TableCell>
             <TableCell>{`${formattedFromDate} - ${formattedToDate}`}</TableCell>
             <TableCell align={'right'} sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{`£5,560`}</TableCell>
-            <TableCell align={'right'} aria-labelledby={'Download payslip'}>
-                <IconButton aria-label={'delete'}>
-                    <DownloadIcon />
-                </IconButton>
-            </TableCell>
         </TableRow>
     );
 }
