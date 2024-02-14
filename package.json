@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@capacitor-community/file-opener": "1.0.5",
         "@capacitor/android": "5.7.0",
         "@capacitor/core": "5.7.0",
         "@capacitor/filesystem": "5.2.1",
@@ -33,9 +34,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "cap:build": "npm run build",
-        "cap:serve": "npm run start",
-        "cap:sync": "npm run build && npx cap copy"
+        "cap:copy": "npm run build && npx cap copy"
     },
     "eslintConfig": {
         "extends": [
